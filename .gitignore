@@ -133,3 +133,4 @@ dmypy.json
 
 #Block our project API Keys Config
 config.py
+config.js
