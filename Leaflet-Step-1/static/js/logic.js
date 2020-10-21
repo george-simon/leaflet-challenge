@@ -18,30 +18,37 @@ var baseURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_wee
 
 // Assemble API query URL
 var url = baseURL
+
  
 // Grab the data with d3
-d3.json(url).then(response => {
-    // console.log(response);
+d3.json(url).then(data => {
+    console.log(data);
 
-    // // Create an array to hold location coordinates
+    // // // Create an array to hold location coordinates
     var locArray = [];
 
     // Loop through data
-    for (var i = 0; i < response.length; i++) {
-        var location = response[i].location;
-        console.log(response[i].location);
-        // Set the data location property to a variable
+    for (var i = 0; i < data.length; i++) {
+        var location = data[i].features.geometry;
+        console.log(location);
+
+        if (location) {
+            locArray.push([location.coordinates[1], location.coordinates[0]]);
+        }
+    
+
         
-
-        // Add circles to map
-        L.circle(response[i].location, {
-          fillOpacity: 0.75,
-          color: "white",
-          fillColor: color,
-          // Adjust radius
-          radius: response[i].points * 1500
-        }).bindPopup("<h1>" + response[i].place + "</h1> <hr> <h3>magnitude: " + response[i].mag + "</h3>").addTo(myMap);
-
     }
+    // console.log(locArray);
 
-});
+    // Add circles to map
+    L.circle(locArray, {
+        fillOpacity: 0.75,
+        color: "white",
+        // fillColor: color,
+        // Adjust radius
+        radius: response[i].depth * 1500
+    }).bindPopup("<h1>" + response[i].place + "</h1> <hr> <h3>magnitude: " + response[i].mag + "</h3>").addTo(myMap);
+    
+
+}).catch(err => console.log(err))
