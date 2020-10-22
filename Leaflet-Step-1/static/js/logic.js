@@ -28,27 +28,26 @@ d3.json(url).then(data => {
     var locArray = [];
 
     // Loop through data
-    for (var i = 0; i < data.length; i++) {
-        var location = data[i].features.geometry;
+    for (var i = 0; i < data.features.length; i++) {
+        var location = data.features[i].geometry;
         console.log(location);
 
         if (location) {
-            locArray.push([location.coordinates[1], location.coordinates[0]]);
+            locArray = [location.coordinates[1], location.coordinates[0]];
         }
-    
-
-        
-    }
-    // console.log(locArray);
-
     // Add circles to map
     L.circle(locArray, {
         fillOpacity: 0.75,
         color: "white",
         // fillColor: color,
         // Adjust radius
-        radius: response[i].depth * 1500
-    }).bindPopup("<h1>" + response[i].place + "</h1> <hr> <h3>magnitude: " + response[i].mag + "</h3>").addTo(myMap);
+        radius: location.coordinates[2] * 1500 // grabs the depth
+    }).bindPopup("<h1>" + data.features[i].place + "</h1> <hr> <h3>magnitude: " + data.features[i].mag + "</h3>").addTo(myMap);
+        
+    }
+    
+
+    
     
 
 }).catch(err => console.log(err))
