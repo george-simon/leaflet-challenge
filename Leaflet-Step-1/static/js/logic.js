@@ -42,7 +42,7 @@ d3.json(url).then(data => {
         // fillColor: color,
         // Adjust radius
         radius: location.coordinates[2] * 1500 // grabs the depth
-    }).bindPopup("<h1>" + data.features[i].place + "</h1> <hr> <h3>magnitude: " + data.features[i].mag + "</h3>").addTo(myMap);
+    }).bindPopup("<h1>" + data.features[i].properties.place + "</h1> <hr> <h3>magnitude: " + data.features[i].properties.mag + "</h3>").addTo(myMap);
         
     }
     
