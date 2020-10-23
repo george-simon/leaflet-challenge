@@ -6,7 +6,7 @@ In this challenge you will work with the United States Geological Survey, or USG
 ### Project Scope
 Help build a tool to visualize their data which will allow them to better educate the public and other government organizations (and hopefully secure more funding..) on issues facing our planet.
 
-### Chalenge
+### Challenge
 * Visualize an earthquake data set.
   * Get your data set
 * Import & Visualize the Data
